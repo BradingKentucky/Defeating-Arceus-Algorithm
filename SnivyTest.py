@@ -12,24 +12,32 @@ print(pokemon.loc[pokemon["name"] == "Snivy"].T)
 #Attack test.
 
 #IMPORTANT: when writing code, .iloc is very imporant. make it that when making a pokemon
-Snivy= TurnTaker.pokemon(pokemon.loc[pokemon["name"] == "Snivy"].iloc[0], 1)
-print(Snivy)
-#stunkfish looks silly. So we are gonna kill it
+#copy below format. just change the pokemon name
+Serperior= TurnTaker.pokemon(pokemon.loc[pokemon["name"] == "Serperior"].iloc[0], 36)
+print(Serperior)
+#Archeops looks cool. It's also a dinosaur, lets see if we can make it go exixnct again
 Stunfisk = TurnTaker.pokemon(pokemon.loc[pokemon["name"] == "Stunfisk"].iloc[0],1)
 
 #attack based off TurnTaker
-print(Stunfisk.hp)
+#print(Stunfisk.hp)
 
 #todo: add https://github.com/veekun/pokedex/blob/master/pokedex/data/csv/moves.csv so can do moves propely
 #https://github.com/veekun/pokedex/blob/master/pokedex/data/csv/pokemon_moves.csv to get moves for each pokemon
-# Multidata set interactions. Class needs to interact with pokemon.csv to get pokemon id which interacts with pokemon_moves.csv to get move id selection which then interacts with moves.csv to get the power of the move
-#snivy's id: 495
-#snivy's moves' ids: alot
-# Plan: make way for it to parse through move id's, since they show up many times, and just get the power from it. accuracy is maybe
-# priotty rn is power
-while Stunfisk.hp > 0:
-    hit= Snivy.Attack(defender_defense=Stunfisk.defense, defender_type=Stunfisk.type1)
+
+#demonstration of an battle
+# Serperior atomoizes the Stunfisk, but the format remains the same for closer battles.
+
+while Serperior.hp >0 :
+    hit= Serperior.Attack(Stunfisk)
     Stunfisk.hp = Stunfisk.hp-hit
-    print(f"{hit} damage dealt to the defenseless {Stunfisk.name}. Health remaining: {Stunfisk.hp}")
+    print(f"{hit} damage dealt with {Serperior.GetBestAttackMoveName()} to the defenseless {Stunfisk.name}. Health remaining: {Stunfisk.hp}")
+    if  Stunfisk.hp < 0:
+        break
+    hit2= Stunfisk.Attack(Serperior)
+    Serperior.hp = Serperior.hp - hit
+    print(f"{hit2} damage dealt with {Stunfisk.GetBestAttackMoveName()} to the cooler {Serperior.name}. Health remaining: {Serperior.hp}")
+
 
 print("He is dead now")
+
+#ok lets make this more fair.
