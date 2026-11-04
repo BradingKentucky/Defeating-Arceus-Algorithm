@@ -1,11 +1,15 @@
 #The Damage Dealt formula is given by https://bulbapedia.bulbagarden.net/wiki/Damage
-import random
+import random, pandas as pd
+from math import floor
 
+from pylablib.devices.Attocube.base import AttocubeBackendError
 from pylablib.devices.IMAQdx.nivision_defs import CThresholdData
+from qutip import bell_state
 
-#TODO: make class pokemon better. make it where, just put pokemon name, and rest is automated for you
 
-#power is excluded
+#done: make class pokemon better. make it where, just put pokemon name, and rest is automated for you
+
+#power is incldued in attack class
 class pokemon():
     def __init__(self, pokemon,level):
         self.name = pokemon["name"]
@@ -16,6 +20,7 @@ class pokemon():
         self.speed = int(pokemon["speed"])
         self.type1 =pokemon["type1"]
         self.type2 = pokemon["type2"]
+        self.BestAttack = self.BestAttackMove()
 
         #fancy setters and getters:
     @property
@@ -82,7 +87,11 @@ class pokemon():
     def type2(self, value):
         self._type2 = value
 
-    def Attack(self,defender_defense,defender_type):
+    def Attack(self,defender):
+        #assign defender variables
+        defender_defense = defender.defense
+        defender_type = defender.type1
+
         #Prelude to damage calucation
         threshold=self.speed/2
         randomnumber= random.randint(0,255)/256
@@ -90,11 +99,60 @@ class pokemon():
             crit = 2
         else:
             crit =1
-        #todo: make way to get all the against_n's into a list that can be searched through to determine if the attacker has an against_n against the defender for bonus
+        #done: make way to get all the against_n's into a list that can be searched through to determine if the attacker has an against_n against the defender for bonus
+
         typebuff1=1
         typebuff2=2
-        #todo make random have floor function before it is divided
 
+
+        #Move finder
+        #gets most powerful move pokemon can do. doesn't consider if move has limits per battle.
+        #Could add defense too. but rn, focus on attack
+
+        # Multidata set interactions.
+        # pokemon.csv to get pokemon id ->
+        # interacts with pokemon_moves.csv ->
+        # move id selection ->
+        # moves.csv to get the power of the move
         #attack is conducted
-        damage=(((((2*self.level)/5)+2)*(self.attack/defender_defense))/50)*crit*(random.randint(85,100)/100)*typebuff1*typebuff2
-        return damage
+        damage=(((((2*self.level)/5)+2)*(self.attack/defender_defense))/50)*crit*(random.randint(85,100)/100)*typebuff1*typebuff2*self.BestAttack["power"]
+        return floor(damage)
+
+        #instead of searching everytime, use this to get the best attack just once
+    def BestAttackMove(self):
+        pokemoncsv = pd.read_csv("pokemon/moves/pokemon.csv")
+        moves = pd.read_csv("pokemon/moves/moves.csv")
+        pokemonmoves = pd.read_csv("pokemon/moves/pokemon_moves.csv")
+
+        #testing to see why worng
+        name = str(self.name).strip().lower()
+        matches = pokemoncsv.loc[
+            pokemoncsv["identifier"].str.strip().str.lower() == name, "id"
+        ]
+
+        if matches.empty:
+            raise ValueError(f"No Pokémon matched {self.name!r}")
+        pokemon_id = pokemoncsv.loc[
+            pokemoncsv["identifier"].str.strip().str.lower() == name,
+            "id"
+        ].iloc[0]
+
+        moveset = pokemonmoves.loc[
+            pokemonmoves["pokemon_id"] == pokemon_id, "move_id"
+        ].drop_duplicates()
+
+        possible_moves = (
+            moves.loc[moves["id"].isin(moveset)]
+            .dropna(subset=["power"])
+            .sort_values("power", ascending=False)
+        )
+
+        if possible_moves.empty:
+            return None
+
+        best = possible_moves.iloc[0]
+        return {"move": best["identifier"], "power": int(best["power"])}
+
+    def GetBestAttackMoveName(self):
+        return self.BestAttackMove()["move"]
+
