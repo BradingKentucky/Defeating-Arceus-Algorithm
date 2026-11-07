@@ -13,7 +13,7 @@ print(pokemon.loc[pokemon["name"] == "Snivy"].T)
 
 #IMPORTANT: when writing code, .iloc is very imporant. make it that when making a pokemon
 #copy below format. just change the pokemon name
-Serperior= TurnTaker.pokemon(pokemon.loc[pokemon["name"] == "Serperior"].iloc[0], 36)
+Serperior= TurnTaker.pokemon(pokemon.loc[pokemon["name"] == "Serperior"].iloc[0], 50)
 print(Serperior)
 #Archeops looks cool. It's also a dinosaur, lets see if we can make it go exixnct again
 Stunfisk = TurnTaker.pokemon(pokemon.loc[pokemon["name"] == "Stunfisk"].iloc[0],1)
@@ -25,7 +25,7 @@ Stunfisk = TurnTaker.pokemon(pokemon.loc[pokemon["name"] == "Stunfisk"].iloc[0],
 #https://github.com/veekun/pokedex/blob/master/pokedex/data/csv/pokemon_moves.csv to get moves for each pokemon
 
 #demonstration of an battle
-# Serperior atomoizes the Stunfisk, but the format remains the same for closer battles.
+# Serperior atomoized the Stunfisk before buffs were applied, now its more evenish
 
 while Serperior.hp >0 :
     hit= Serperior.Attack(Stunfisk)
