@@ -1,10 +1,6 @@
 #The Damage Dealt formula is given by https://bulbapedia.bulbagarden.net/wiki/Damage
 import random, pandas as pd
-from math import floor
-
-from pylablib.devices.Attocube.base import AttocubeBackendError
-from pylablib.devices.IMAQdx.nivision_defs import CThresholdData
-from qutip import bell_state
+from math import floor, nan
 
 
 #done: make class pokemon better. make it where, just put pokemon name, and rest is automated for you
@@ -21,7 +17,7 @@ class pokemon():
         self.type1 =pokemon["type1"]
         self.type2 = pokemon["type2"]
         self.BestAttack = self.BestAttackMove()
-
+        self.against={"bug": pokemon["against_bug"],"dark":pokemon["against_dark"],"dragon":pokemon["against_dragon"],"electric":pokemon["against_electric"],"fairy":pokemon["against_fairy"],"fight":pokemon["against_fight"],"flying":pokemon["against_flying"],"ghost":pokemon["against_ghost"],"grass":pokemon["against_grass"],"ground":pokemon["against_ground"],"ice":pokemon["against_ice"],"normal":pokemon["against_normal"],"poison":pokemon["against_poison"],"psychic":pokemon["against_psychic"],"rock":pokemon["against_rock"],"steel":pokemon["against_steel"],"water":pokemon["against_water"]}
         #fancy setters and getters:
     @property
     def name(self):
@@ -87,11 +83,21 @@ class pokemon():
     def type2(self, value):
         self._type2 = value
 
+    @property
+    def against(self):
+        return self._against
+
+    @against.setter
+    def against(self, value):
+        self._against = value
+
+
     def Attack(self,defender):
         #assign defender variables
         defender_defense = defender.defense
-        defender_type = defender.type1
-
+        defender_type1 = defender.type1
+        defender_type2 = defender.type2
+        typebuff2=1
         #Prelude to damage calucation
         threshold=self.speed/2
         randomnumber= random.randint(0,255)/256
@@ -101,8 +107,16 @@ class pokemon():
             crit =1
         #done: make way to get all the against_n's into a list that can be searched through to determine if the attacker has an against_n against the defender for bonus
 
-        typebuff1=1
-        typebuff2=2
+        for buff in self.against:
+            if buff == defender_type1:
+                typebuff1=self._against[buff]
+                break
+        if defender_type2 != nan:
+            for buff in self.against:
+                if buff == defender_type2:
+                    typebuff2 = self._against[buff]
+                    break
+
 
 
         #Move finder
