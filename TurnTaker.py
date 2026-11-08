@@ -97,6 +97,7 @@ class pokemon():
         defender_defense = defender.defense
         defender_type1 = defender.type1
         defender_type2 = defender.type2
+        typebuff1=1
         typebuff2=1
         #Prelude to damage calucation
         threshold=self.speed/2
@@ -130,6 +131,7 @@ class pokemon():
         # moves.csv to get the power of the move
         #attack is conducted
         damage=(((((2*self.level)/5)+2)*(self.attack/defender_defense))/50)*crit*(random.randint(85,100)/100)*typebuff1*typebuff2*self.BestAttack["power"]
+        defender.hp = defender.hp-floor(damage)
         return floor(damage)
 
         #instead of searching everytime, use this to get the best attack just once
