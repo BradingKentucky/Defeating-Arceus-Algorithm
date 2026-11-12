@@ -1,10 +1,9 @@
 import pandas as pd
-from rustworkx.rustworkx import hits
-from scipy.constants import hp
-
 import TurnTaker
 # Test to make sure everything is right and well
 pokemon=pd.read_csv("pokemon/pokemonB&W.csv")
+pokemon["score"] = 0.0
+#be sure to assign score to it in code. must be dobule
 
 # Snivy is my favorite pokemon. This sees if he is in the dataset
 print(pokemon.loc[pokemon["name"] == "Snivy"].T)
@@ -13,6 +12,7 @@ print(pokemon.loc[pokemon["name"] == "Snivy"].T)
 
 #IMPORTANT: when writing code, .iloc is very imporant. make it that when making a pokemon
 #copy below format. just change the pokemon name
+#when making pokemon level, note that the lowest level requiered ro evolve would be 64 for Zweilous -> Hydreigon. So for simpliacty just make all pokemone have level of 64- or not up to you :)
 Serperior= TurnTaker.pokemon(pokemon.loc[pokemon["name"] == "Serperior"].iloc[0], 50)
 print(Serperior)
 #Archeops looks cool. It's also a dinosaur, lets see if we can make it go exixnct again
