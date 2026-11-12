@@ -16,6 +16,7 @@ class pokemon():
         self.speed = int(pokemon["speed"])
         self.type1 =pokemon["type1"]
         self.type2 = pokemon["type2"]
+        self.score = pokemon["score"] #make sure you add this in your code
         self.BestAttack = self.BestAttackMove()
         self.against={"bug": pokemon["against_bug"],"dark":pokemon["against_dark"],"dragon":pokemon["against_dragon"],"electric":pokemon["against_electric"],"fairy":pokemon["against_fairy"],"fight":pokemon["against_fight"],"flying":pokemon["against_flying"],"ghost":pokemon["against_ghost"],"grass":pokemon["against_grass"],"ground":pokemon["against_ground"],"ice":pokemon["against_ice"],"normal":pokemon["against_normal"],"poison":pokemon["against_poison"],"psychic":pokemon["against_psychic"],"rock":pokemon["against_rock"],"steel":pokemon["against_steel"],"water":pokemon["against_water"]}
         #fancy setters and getters:
@@ -82,6 +83,14 @@ class pokemon():
     @type2.setter
     def type2(self, value):
         self._type2 = value
+
+    @property
+    def score(self):
+        return self._score
+
+    @score.setter
+    def score(self, value):
+        self._score = value
 
     @property
     def against(self):
@@ -171,4 +180,9 @@ class pokemon():
 
     def GetBestAttackMoveName(self):
         return self.BestAttackMove()["move"]
+
+    def AdjustScore(self, Opponent, turn):
+        # Score it determined by taking pokemon health at end of a battle and dividing it by the product of boss health and turns
+        self.score = self.hp/(Opponent.hp*turn)
+        return self.score
 
