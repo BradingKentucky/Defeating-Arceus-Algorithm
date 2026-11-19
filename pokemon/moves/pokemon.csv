@@ -548,12 +548,12 @@ id,identifier,species_id,height,weight,base_experience,order,is_default
 547,whimsicott,547,7,66,168,663,1
 548,petilil,548,5,66,56,664,1
 549,lilligant,549,11,163,168,665,1
-550,basculin-red-striped,550,10,180,161,666,1
+550,basculin,550,10,180,161,666,1
 551,sandile,551,7,152,58,668,1
 552,krokorok,552,10,334,123,669,1
 553,krookodile,553,15,963,260,670,1
 554,darumaka,554,6,375,63,671,1
-555,darmanitan-standard,555,13,929,168,673,1
+555,darmanitan,555,13,929,168,673,1
 556,maractus,556,10,280,161,677,1
 557,dwebble,557,3,145,65,678,1
 558,crustle,558,14,2000,170,679,1
@@ -912,8 +912,6 @@ id,identifier,species_id,height,weight,base_experience,order,is_default
 10013,castform-sunny,351,3,8,147,465,0
 10014,castform-rainy,351,3,8,147,466,0
 10015,castform-snowy,351,3,8,147,467,0
-10016,basculin-blue-striped,550,10,180,161,667,0
-10017,darmanitan-zen,555,13,929,189,674,0
 10018,meloetta-pirouette,648,6,65,270,778,0
 10019,tornadus-therian,641,14,630,290,765,0
 10020,thundurus-therian,642,30,610,290,767,0
@@ -1073,8 +1071,6 @@ id,identifier,species_id,height,weight,base_experience,order,is_default
 10174,zigzagoon-galar,263,4,175,56,362,0
 10175,linoone-galar,264,5,325,147,364,0
 10176,darumaka-galar,554,7,400,63,672,0
-10177,darmanitan-galar-standard,555,17,1200,168,675,0
-10178,darmanitan-galar-zen,555,17,1200,189,676,0
 10179,yamask-galar,562,5,15,61,684,0
 10180,stunfisk-galar,618,7,205,165,741,0
 10181,zygarde-10,718,12,335,243,859,0
