@@ -2,7 +2,7 @@
 A collection of three algorithms to find the best Pokémon team to defeat Arceus, aka the god of the Pokémon universe.
 
 ## Algorithms used
-1: Expectiminimax
+1: Greedy Monte Carlo
 2: Genetic
 3: Brute Force
 
