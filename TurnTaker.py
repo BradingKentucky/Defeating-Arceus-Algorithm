@@ -183,6 +183,9 @@ class pokemon():
 
     def AdjustScore(self, Opponent, turn):
         # Score it determined by taking pokemon health at end of a battle and dividing it by the product of boss health and turns
-        self.score = self.hp/(Opponent.hp*turn)
+        if Opponent.hp == 0:
+            self.score = self.hp /(turn)
+        else:
+            self.score = self.hp/(Opponent.hp*turn)
         return self.score
 
