@@ -1,0 +1,1 @@
+Monte Carlo Greedy: ['Emboar', 'Stoutland', 'Unfezant'], Average score of team: -1.4857
