@@ -13,7 +13,7 @@ When the above inputs are put in, the algorthim run throughs TurnTaker's battle 
 An opmtial soltuion would be a team of three pokemon who can consitently beat Arceus with the fewest turns possible. The score is what tracks this.
 
 ## Team responsiblies
-- Combs: Making TurnTaker class and thrid algorthim. Readme.md, and some dataset cleanup
+- Combs: Making TurnTaker class and thrid algorthim. Readme.md, some dataset cleanup, and slides
 
 ## Algorithms used
 1: Greedy Monte Carlo
