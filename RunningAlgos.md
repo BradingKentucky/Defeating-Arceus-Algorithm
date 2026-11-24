@@ -5,4 +5,4 @@ in command line, type
     
 if you want to see compute time aswell (for windows)
 
-      Measure-Command { python script.py }
+      Measure-Command { python .\MonteCarlo_Greed.py }
